@@ -1,4 +1,7 @@
 from interface.index import Interface
+from command.controllCommands import ControllCommands
 
-Interface()
+controllCommands = ControllCommands()
+
+Interface(controllCommands)
 
