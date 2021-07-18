@@ -13,7 +13,7 @@ class ControllCommands:
   def execute_a_command(self, text):
     list_arguments = text.split(' ')
 
-    def recursive_command(index, actualVariable):
+    def recursive_command(index, actualVariable) -> None:
       if type(actualVariable) is not dict:
         actualVariable(text)
         return
@@ -29,7 +29,7 @@ class ControllCommands:
         if key == list_arguments[_index]:
           recursive_command(index, actualVariable[key])
           break
-    
+
     recursive_command(0, self.all_commands)
 
 

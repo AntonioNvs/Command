@@ -32,7 +32,7 @@ class ControllFunctions:
           attribute = getattr(module, attribute_name)
 
           # Se o atributo for uma classe e o nome for igual o do comando, é permitido o instanciamento
-          if isclass(attribute) and file.replace('.py', '') in attribute.__dict__['__module__']:
+          if isclass(attribute) and "command.functions" in attribute.__dict__['__module__']:
             _class = attribute(window)
 
             all_methods = [method for method in dir(_class) if method.startswith('__') is False]
