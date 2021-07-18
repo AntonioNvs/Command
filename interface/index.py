@@ -4,7 +4,7 @@ from interface.components.inputCommands import InputCommands
 from command.controllCommands import ControllCommands
 
 class Interface(tk.Tk):
-  def __init__(self, controllCommands: ControllCommands) -> None:
+  def __init__(self) -> None:
       # Iniciando a interface
       super().__init__()
 
@@ -18,8 +18,7 @@ class Interface(tk.Tk):
       self.labels = []
       self.limitLabels = 3
       
-      self.controllCommands = controllCommands
-      self.controllCommands.set_window(self)
+      self.controllCommands = ControllCommands(self)
 
       self.mainloop()
 

@@ -15,7 +15,7 @@ class ControllCommands:
 
     def recursive_command(index, actualVariable):
       if type(actualVariable) is not dict:
-        actualVariable(text, self.window)
+        actualVariable(text)
         return
 
       if index == len(list_arguments):

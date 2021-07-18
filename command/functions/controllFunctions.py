@@ -31,8 +31,9 @@ class ControllFunctions:
         for attribute_name in dir(module):
           attribute = getattr(module, attribute_name)
 
-          if isclass(attribute):
-            _class = attribute()
+          # Se o atributo for uma classe e o nome for igual o do comando, é permitido o instanciamento
+          if isclass(attribute) and file.replace('.py', '') in attribute.__dict__['__module__']:
+            _class = attribute(window)
 
             all_methods = [method for method in dir(_class) if method.startswith('__') is False]
 
