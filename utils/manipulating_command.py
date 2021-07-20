@@ -1,4 +1,4 @@
-from error.classError import Error
+from src.error.classError import Error
 
 def get_a_specific_value_in_a_command(text: str, position: int) -> str or Error:
   # Tenta achar a devida posição no comando, se não existir, retorne um erro
