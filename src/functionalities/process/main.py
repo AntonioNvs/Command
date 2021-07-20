@@ -7,23 +7,23 @@ class ControllProcess(AnalysisProcess):
   def __init__(self) -> None:
     super().__init__(ProcessDatabase())
 
-    time.clock()
+    self.name_state = "get_process"
+    self.is_thread = True
+    self.state = False
+    self.th = Thread(target=self.loop_process)
 
-    self.init_program()
+    time.clock()
 
   # Thread do processo de looping
   def loop_process(self):
-    while not self.is_exit:
+    while self.state:
       self.fill_info_about_process()
+      time.sleep(1)
 
-  def init_program(self):
-    self.is_exit = False
-
+  def execute(self):
     # Instanceando a thread do loop de análise de processos
-    self._th_process = Thread(target=self.loop_process)
-    self._th_process.start()
+    self.th.start()
 
-  def close_program(self):
-    self.is_exit = True
+  def finish(self):
     self.end_process()
 

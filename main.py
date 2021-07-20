@@ -3,6 +3,9 @@ import sys
 sys.dont_write_bytecode = True
 
 from src.interface.index import Interface
+from parallel.parallel import Parallel
 
-Interface()
+parallelClass = Parallel()
+
+Interface(parallelClass)
 

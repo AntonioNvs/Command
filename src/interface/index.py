@@ -1,10 +1,12 @@
 import tkinter as tk
+
 from src.interface.components.labelCommand import LabelCommand
 from src.interface.components.inputCommands import InputCommands
 from src.command.controllCommands import ControllCommands
+from src.utils.manipulating_command import get_a_specific_value_in_a_command
 
-class Interface(tk.Tk):
-  def __init__(self) -> None:
+class Interface(tk.Tk):  
+  def __init__(self, parallelClass) -> None:
       # Iniciando a interface
       super().__init__()
 
@@ -15,10 +17,16 @@ class Interface(tk.Tk):
       self.inputCommands = InputCommands(self)
       self.inputCommands.bind("<Return>", self.send_command)
 
+      self.protocol("WM_DELETE_WINDOW", self.on_close)
+
+
       self.labels = []
       self.limitLabels = 3
       
       self.controllCommands = ControllCommands(self)
+
+      self.parallelClass = parallelClass
+      self.keyForParallel = parallelClass.key
 
       self.mainloop()
 
@@ -36,7 +44,11 @@ class Interface(tk.Tk):
 
       self.labels = []
 
-    self.controllCommands.execute_a_command(text)
+    # Chama um tipo de funcionalidade a partir da chave especificada
+    if get_a_specific_value_in_a_command(text, 0) == self.keyForParallel:
+      self.parallelClass.command_for_activity(text, self)
+    else:
+      self.controllCommands.execute_a_command(text)
 
     self.labels.append(label)
 
@@ -44,3 +56,9 @@ class Interface(tk.Tk):
     label = LabelCommand(self, textAnswer, type="answer")
 
     self.labels.append(label)
+
+
+  def on_close(self):
+    self.parallelClass.finish_the_activities(self)
+
+    self.destroy()

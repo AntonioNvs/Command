@@ -8,7 +8,7 @@ class AnalysisProcess(GetProcess):
 
       self.time_for_update = 90 # Tempo de atualziação em segundos
       self.database = database
-      self.name_file_with_name_process = 'process_names.txt'
+      self.name_file_with_name_process = 'src/functionalities/process/process_names.txt'
       self.name_all_task_pc = 'all_info_pc'
       self.files_updated = 0
 

@@ -1,7 +1,7 @@
 from src.error.classError import Error
 from src.interface.index import Interface
 from src.functionalities.process.get_data_process import GetDataProcess
-from utils.manipulating_command import get_a_specific_value_in_a_command
+from src.utils.manipulating_command import get_a_specific_value_in_a_command
 
 class Process:
   def __init__(self, window: Interface) -> None:
