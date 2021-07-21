@@ -2,6 +2,7 @@ from src.error.classError import Error
 from src.interface.index import Interface
 from src.functionalities.process.get_data_process import GetDataProcess
 from src.utils.manipulating_command import get_a_specific_value_in_a_command
+from src.error.actions import error_ocured
 
 class Process:
   def __init__(self, window: Interface) -> None:
@@ -11,8 +12,7 @@ class Process:
   def info(self, text: str) -> None:
     task = get_a_specific_value_in_a_command(text, 2)
 
-    if isinstance(task, Error):
-      self.window.send_answer(task.message)
+    if error_ocured(task, lambda e: self.window.send_answer(e.message)):
       return
 
     info_task = self.get_info_data.get_info_of_a_task(task)
