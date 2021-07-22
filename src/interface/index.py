@@ -19,10 +19,9 @@ class Interface(tk.Tk):
 
       self.protocol("WM_DELETE_WINDOW", self.on_close)
 
-
       self.labels = []
       self.limitLabels = 3
-      
+
       self.controllCommands = ControllCommands(self)
 
       self.parallelClass = parallelClass

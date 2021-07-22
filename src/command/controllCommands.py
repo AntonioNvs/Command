@@ -18,6 +18,19 @@ class ControllCommands:
         actualVariable(text)
         return
 
+      # Caso o comando(classe) tenha uma função com seu nome, ela é executada
+      if list_arguments[index] in actualVariable.keys():
+        key = list_arguments[index]
+        new_dict = actualVariable[key]
+
+        try:
+          # Se o comando tiver uma função com mesmo nome e o próximo argumento não estiver como método, execute.
+          if key in new_dict.keys() and type(new_dict[key]) is not dict and not list_arguments[index+1] in new_dict.keys():
+            new_dict[key](text)
+            return
+        except:
+          pass
+
       if index == len(list_arguments):
         self.window.send_answer("This command does not exist")
         return

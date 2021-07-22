@@ -1,6 +1,5 @@
 from src.interface.index import Interface
-from src.functionalities.music import open_a_playlist_with_type
-from src.error.classError import Error
+from src.functionalities.music import open_a_playlist_with_type, search_and_open_music
 from src.utils.manipulating_command import get_a_specific_value_in_a_command
 from src.functionalities.open import open_a_url
 from src.error.actions import error_ocured
@@ -8,6 +7,11 @@ from src.error.actions import error_ocured
 class Open:
   def __init__(self, window: Interface) -> None:
     self.window = window
+
+  def music(self, text):
+    textSearch = " ".join(text.split(' ')[1:])
+
+    search_and_open_music(textSearch)
 
   def playlist(self, text):
     playlist = get_a_specific_value_in_a_command(text, 2)

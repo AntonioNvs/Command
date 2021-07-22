@@ -1,3 +1,16 @@
+"""
+  Organiza as funcionalidades por comando da seguinte forma
+
+  folder -> file -> class -> method
+
+  =
+
+  command + function + args
+
+  Entretanto, caso seja necessário a organização mudar: 'function + args',
+  basta colocar o mesmo nome da classe no método
+"""
+
 import os
 import re
 from importlib import import_module
