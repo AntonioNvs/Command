@@ -1,4 +1,8 @@
 import tkinter as tk
+from threading import Thread
+from src.functionalities.stocks import get_stocks_value
+from time import sleep
+
 
 class RotatingStockLine(tk.Frame):
   def __init__(self, window: tk.Tk) -> None:
@@ -14,21 +18,22 @@ class RotatingStockLine(tk.Frame):
 
     self.labels_of_stocks = []
 
-    self.stocks = ["ABEV3"]
-    self.add_stocks("ABEV3", 3.54)
-    self.add_stocks("VIVR4", -0.54)
-    self.add_stocks("ITUB4", 0.24)
-    self.add_stocks("USIM5", 1.21)
-    self.add_stocks("MULT4", -0.24)
-    self.add_stocks("BBDR4", 4.50)
-    self.add_stocks("MGL3", 8.54)
+    self.stocks = [
+      "ABEV3", "B3SA3", "BBDC3", "CMIG4", "CSMG3",
+      "ELET6", "GGBR4", "GOLL4", "ITSA4", "ITUB4", 
+      "LREN3", "MGLU3", "MULT3", "PETR4", "USIM5", 
+      "VALE3", "WEGE3", "BIDI11", "OIBR3", "VIVR3"]
 
+
+    for stock in get_stocks_value(self.stocks):
+      self.add_stocks(stock[0], stock[1])
+      
     self.ind = 0
     self.window = window
 
     self.animation()
 
-  def add_stocks(self, text: str, value: float):
+  def add_stocks(self, text: str, value: float) -> None:
     frame = tk.Frame(
       self,
       bg=self.bg,
@@ -59,7 +64,7 @@ class RotatingStockLine(tk.Frame):
     
     self.labels_of_stocks.append((frame, stock_lbl, value_lbl))
 
-  def animation(self):
+  def animation(self) -> None:
     self.limit = 5
 
     assert len(self.labels_of_stocks) > self.limit
