@@ -2,6 +2,7 @@ import tkinter as tk
 
 from src.interface.components.labelCommand import LabelCommand
 from src.interface.components.inputCommands import InputCommands
+from src.interface.components.rotatingStockLine import RotatingStockLine
 from src.command.controllCommands import ControllCommands
 from src.utils.manipulating_command import get_a_specific_value_in_a_command
 
@@ -16,6 +17,9 @@ class Interface(tk.Tk):
       
       self.inputCommands = InputCommands(self)
       self.inputCommands.bind("<Return>", self.send_command)
+
+      self.rotatingStockLine = RotatingStockLine(self)
+
 
       self.protocol("WM_DELETE_WINDOW", self.on_close)
 

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.constants import VERTICAL
 
 class LabelCommand(tk.Label):
   def __init__(self, main: tk.Tk, text: str, type: str) -> None:
@@ -11,7 +12,8 @@ class LabelCommand(tk.Label):
                      fg=fg,
                      justify=tk.LEFT,
                      anchor=anchor,
-                     padx=16)
+                     padx=16,
+                     )
 
     self.pack(side=tk.TOP, fill=tk.BOTH)
     
