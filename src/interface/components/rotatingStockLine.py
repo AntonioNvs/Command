@@ -15,7 +15,13 @@ class RotatingStockLine(tk.Frame):
     self.labels_of_stocks = []
 
     self.stocks = ["ABEV3"]
-    [self.add_stocks("ABEV3", -2.54) for _ in range(10)]
+    self.add_stocks("ABEV3", 3.54)
+    self.add_stocks("VIVR4", -0.54)
+    self.add_stocks("ITUB4", 0.24)
+    self.add_stocks("USIM5", 1.21)
+    self.add_stocks("MULT4", -0.24)
+    self.add_stocks("BBDR4", 4.50)
+    self.add_stocks("MGL3", 8.54)
 
     self.ind = 0
     self.window = window
@@ -63,7 +69,7 @@ class RotatingStockLine(tk.Frame):
       stock[0].grid_forget()
 
     # Definindo as ações que serão visíveis
-    self.ind = self.ind + 1 if (self.ind+2)*self.limit <= len(self.labels_of_stocks) else 0
+    self.ind = self.ind + 1 if (self.ind+1)*self.limit < len(self.labels_of_stocks) else 0
 
     for i, stock in enumerate(self.select_stocks()):
       frame = stock[0]
