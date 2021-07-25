@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+
+
 def get_stocks_value(stocksSymbols: list):
   url = 'https://valorinveste.globo.com/cotacoes/'
   
@@ -27,7 +29,7 @@ def get_stocks_value(stocksSymbols: list):
       
       symbol = tds[1].text.strip()
     
-      if symbol in stocksSymbols: # Código
+      if symbol in stocksSymbols:
         value = float(tds[3].text.replace('%', '').strip().replace(',', '.'))
 
         stocks.append((symbol, value))
@@ -36,7 +38,6 @@ def get_stocks_value(stocksSymbols: list):
       pass
 
   return stocks
-
 
 if __name__ == '__main__':
   get_stocks_value(['ABEV3'])

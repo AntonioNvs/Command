@@ -11,7 +11,7 @@ def get_variable(variable):
       # Encontrando a linha com a variável especificada
       line_with_variable = [line for line in source.read().split('\n') if variable in line]
 
-    return bool(line_with_variable[0].split(" ")[1])
+    return line_with_variable[0].split(" ")[1] == 'True'
   else:
     set_variable(variable, True)
 

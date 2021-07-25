@@ -11,21 +11,23 @@
   state: retorna o estado 
 
   Variáveis
+  name: nome da classe a ser representada
   name_state: nome da variável do estado
   state: tem que estar em execução ou não (somente thread)
   th: thread
   is_thread: o programa precisa ser executado em thread
-
 """
 
 from time import sleep
 from src.functionalities.process.main import ControllProcess
+from src.functionalities.stocks.main import StocksControll
 from src.utils.txt import get_variable, set_variable
 
 class ParallelActivities:
-  def __init__(self) -> None:
+  def __init__(self, window) -> None:
     self.classActivities = {
-      'process': ControllProcess()
+      'process': ControllProcess(),
+      'stocks': StocksControll(window)
     }
 
     self.program_is_running = True
@@ -33,6 +35,7 @@ class ParallelActivities:
 
     # Verificação se todas as classes possuem as funções e os atributos
     for _class in self.classActivities.values():
+      getattr(_class, 'name')
       getattr(_class, 'execute')
       getattr(_class, 'finish')
       getattr(_class, 'name_state')
@@ -56,6 +59,7 @@ class ParallelActivities:
   def execute_all(self):
     for _class in self.classActivities.values():
       if get_variable(_class.name_state) and _class.state is False:
+        print(f'{_class.name_state} está ativo. {get_variable(_class.name_state)}')
         _class.state = True
         _class.execute()
 

@@ -2,19 +2,17 @@
   Controle de todas as atividades em paralelo do programa
 """
 
-from tkinter.constants import TRUE
 from parallel.actives import ParallelActivities
-from src.interface.index import Interface
 
 class Parallel(ParallelActivities):
-  def __init__(self) -> None:
-    super().__init__()
+  def __init__(self, window) -> None:
+    super().__init__(window)
     self.key = "p"
 
     self.execute_all()
 
   # Executando o comando para determinada atividade
-  def command_for_activity(self, text: str, window: Interface) -> None:
+  def command_for_activity(self, text: str, window) -> None:
     activity = ""
     try:
       _, activity, method = text.split(' ')
@@ -37,7 +35,7 @@ class Parallel(ParallelActivities):
       window.send_answer("There is no such method.")
 
   # Terminando as atividades no caso de fechar a tela
-  def finish_the_activities(self, window: Interface):
+  def finish_the_activities(self, window):
     window.send_answer("Terminando todas as atividades..")
 
     self.program_is_running = False
@@ -54,3 +52,4 @@ class Parallel(ParallelActivities):
       for i, _class in enumerate(self.classActivities.values()):
         if _class.is_thread is True:
           threads_is_finished[i] = not _class.th.is_alive()
+          print(f'{_class.name} is finished!')

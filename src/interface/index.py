@@ -5,9 +5,10 @@ from src.interface.components.inputCommands import InputCommands
 from src.interface.components.rotatingStockLine import RotatingStockLine
 from src.command.controllCommands import ControllCommands
 from src.utils.manipulating_command import get_a_specific_value_in_a_command
+from parallel.parallel import Parallel
 
 class Interface(tk.Tk):  
-  def __init__(self, parallelClass) -> None:
+  def __init__(self) -> None:
       # Iniciando a interface
       super().__init__()
 
@@ -20,6 +21,8 @@ class Interface(tk.Tk):
 
       self.rotatingStockLine = RotatingStockLine(self)
 
+      self.parallelClass = Parallel(self)
+      self.keyForParallel = self.parallelClass.key
 
       self.protocol("WM_DELETE_WINDOW", self.on_close)
 
@@ -27,9 +30,6 @@ class Interface(tk.Tk):
       self.limitLabels = 3
 
       self.controllCommands = ControllCommands(self)
-
-      self.parallelClass = parallelClass
-      self.keyForParallel = parallelClass.key
 
       self.mainloop()
 
@@ -59,7 +59,6 @@ class Interface(tk.Tk):
     label = LabelCommand(self, textAnswer, type="answer")
 
     self.labels.append(label)
-
 
   def on_close(self):
     self.parallelClass.finish_the_activities(self)

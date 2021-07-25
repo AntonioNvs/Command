@@ -1,5 +1,5 @@
 get_process False
-
+stocks_value True
 
 
 

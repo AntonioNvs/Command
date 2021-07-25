@@ -4,6 +4,7 @@ from threading import Thread
 import time
 
 class ControllProcess(AnalysisProcess):
+  name = 'process'
   def __init__(self) -> None:
     super().__init__(ProcessDatabase())
 
