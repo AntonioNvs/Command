@@ -14,7 +14,8 @@
 import os
 import re
 from importlib import import_module
-from inspect import isclass
+from inspect import isclass, ismethod
+
 
 class ControllFunctions:
   def __init__(self, window) -> None:
@@ -49,7 +50,7 @@ class ControllFunctions:
             _class = attribute(window)
 
             all_methods = [method for method in dir(_class) if method.startswith('__') is False]
-
+            
             info_class = (_class, all_methods)
 
       # Função de recursividade para todas as formas de comando com sua respectiva função
@@ -58,8 +59,10 @@ class ControllFunctions:
           _class, all_methods = info_class
 
           for method in all_methods:
-            actual[method] = getattr(_class, method)
+            meth = getattr(_class, method)
 
+            if ismethod(meth):
+              actual[method] = meth
           return
 
         try:
